@@ -11,8 +11,9 @@ from bs4 import BeautifulSoup
 from pandas.plotting import scatter_matrix
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import scale
-plt.style.use('ggplot')
-# api_key = "RGAPI-d211d240-d0a2-42df-8564-1aa5ac451612"
+import re
+# plt.style.use('ggplot')
+# api_key = "RGAPI-d6357266-107b-47e5-bfab-ad0bc266863c"
 # user_url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/Novum?api_key="+api_key
 # match_url = "https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/1L4ebzOq-2tERbxca_G36I6tfKXdfQtdM1ISAQGPMJ5sM04?api_key=" + api_key
 # response = requests.get(user_url)
@@ -23,7 +24,7 @@ plt.style.use('ggplot')
 
 # champRawData = json.loads(ddragresponse.text)
 # crd = champRawData['data']
-# kat_blurb = crd['Katarina']['blurb']
+# kat_blurb = crd['Katarina']
 # print(kat_blurb)
 def getTeamData(teams_url):
 
@@ -66,14 +67,81 @@ def getTeamData(teams_url):
 
     df = pd.DataFrame.from_dict(d, orient = 'index', columns = stats_list)
     # df = pd.DataFrame(numpy.random.randn(1000, 4), columns=['A','B','C','D'])
-    scatter_matrix(df, alpha=0.2)
+    #scatter_matrix(df, alpha=0.2)
     # pd.plotting.scatter_matrix(df, diagonal = 'kde')
-    plt.show()
+    #plt.show()
     return df
         
     #print(teams_html)
+def getPlayerStats(playerName, year,champion ):
+    player_url = "https://lol.gamepedia.com/Special:RunQuery/TournamentStatistics?TS%5Bpreload%5D=PlayerByChampion&TS%5Byear%5D=" + str(year) + "&TS%5Bspl%5D=Yes&TS%5Blink%5D=" + playerName + "&pfRunQueryFormName=TournamentStatistics"
+    player_page = requests.get(player_url)
+    player_soup = BeautifulSoup(player_page.content,'html.parser')
+    stats_list = ["Games", "WR", "KDA", "CS/M", "Gold/M"]
+    d = {}
+    #print((player_soup.prettify()).encode('utf8'))
+    table = player_soup.find(lambda tag: tag.name=='table' ) 
+    rows = table.findAll(lambda tag: tag.name=='tr')
+    for row in rows:
+        if champion in row.text:
+            cols = row.findAll(lambda tag: tag.name == 'td')
+            counter = 0
+            stats_counter = 0
+            for col in cols:
+                if(counter == 1 or counter == 4 or counter == 8 or counter == 10 or counter == 12):
+                    
+                    if('%' in col.text):
+                        index = col.text.find('%')
+                        d[stats_list[stats_counter]]=(float(col.text[0:index]))
+                    else:
+                        d[stats_list[stats_counter]]=(float(col.text)) 
+                    stats_counter+=1
+                
+                counter+=1
+    return d
+def getChampStats(champion,role):
+    champ_url = "https://na.op.gg/champion/" + champion + "/statistics/" + role
+    champ_page = requests.get(champ_url)
+    champ_soup = BeautifulSoup(champ_page.content,'html.parser')
+    winrateByLength = champ_soup.find(id="Trend-GameLengthWinRateGraph").next_siblings
+    #print(champ_soup.encode('utf8'))
+    #print()
+    counter = 0
+    winrates = []
+    for sibling in winrateByLength:
+        if counter == 1:
+            strsib = str(sibling.encode('utf8'))
+            start_substr = "\"y\":"
+            yindex = strsib.find(start_substr)
+            matches = re.finditer(start_substr, strsib)
+            matches_positions = [match.start() for match in matches]
+            for i in range(5):
+                startindex = matches_positions[i]+4
+                wr_num = ""
+                temp = strsib[startindex]
+                tempcount = 0
+                while(temp != ',' and tempcount <5):
+                    wr_num= wr_num+(strsib[startindex + tempcount])
+                    temp = strsib[startindex+tempcount]
+                    tempcount+=1
+                winrates.append(str(wr_num))
 
+        counter+=1
+    return winrates
+
+def appendAllStats(players, year, champions,roles):
+    totalPlayerStats = pd.DataFrame()
+    for i in range(len(players)):
+        playerStats = getPlayerStats(players[i],year,champions[i])
+        champStats = getChampStats(champions[i],roles[i])
+        totalPlayerStats = totalPlayerStats.append(playerStats,ignore_index = True)
+    return totalPlayerStats
 
 teams_url = "https://gol.gg/teams/list/season-S10/split-Summer/region-NA/tournament-ALL/week-ALL/"
-df = getTeamData(teams_url)
-print(df)
+team_df = getTeamData(teams_url)
+players = ["Licorice","Blaber","Nisqy","Zven","Vulcan%20(Philippe%20Laflamme)"]
+champions = ["Sett","Olaf","Zoe","Ezreal","Thresh"]
+roles = ["Top", "Jungle","Middle","adc","Support"]
+#totalPlayerStats = appendAllStats(players,2020,champions, roles)
+getChampStats("Ashe","adc")
+#print(totalPlayerStats)

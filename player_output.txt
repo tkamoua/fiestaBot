@@ -1,0 +1,16 @@
+<td class="spstats-subject"><img alt="WukongSquare.png" data-file-height="120" data-file-width="120" decoding="async" height="20" src="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/6/6d/WukongSquare.png/20px-WukongSquare.png?version=260cc4162cc8012699d16208827c5dde" srcset="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/6/6d/WukongSquare.png/30px-WukongSquare.png?version=260cc4162cc8012699d16208827c5dde 1.5x, https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/6/6d/WukongSquare.png/40px-WukongSquare.png?version=260cc4162cc8012699d16208827c5dde 2x" width="20"/> Wukong</td>
+<td><a class="external text" href="https://lol.gamepedia.com/Special:RunQuery/MatchHistoryPlayer?MHP%5Bpreload%5D=Champion&amp;MHP%5Byear%5D=2020&amp;MHP%5Blink%5D=Licorice&amp;MHP%5Bchampion%5D=Wukong&amp;MHP%5Bspl%5D=Yes&amp;pfRunQueryFormName=MatchHistoryPlayer" rel="noreferrer noopener" target="_blank">2</a></td>
+<td>2</td>
+<td>0</td>
+<td>100%</td>
+<td>4.5</td>
+<td>0.5</td>
+<td>8.5</td>
+<td>26</td>
+<td>223.5</td>
+<td>8.47</td>
+<td><span class="gold-as-thousands">12.7</span></td>
+<td>483</td>
+<td>72.2%</td>
+<td>25%</td>
+<td>23.2%</td>

@@ -73,11 +73,28 @@ def getTeamData(teams_url):
     return df
         
     #print(teams_html)
+def removePercent(my_str):
+    index = my_str.find('%')
+    new_str = ""
+    for i in range(index):
+        new_str= new_str +(my_str[i])
+    return new_str
 def getPlayerStats(playerName, year,champion ):
     player_url = "https://lol.gamepedia.com/Special:RunQuery/TournamentStatistics?TS%5Bpreload%5D=PlayerByChampion&TS%5Byear%5D=" + str(year) + "&TS%5Bspl%5D=Yes&TS%5Blink%5D=" + playerName + "&pfRunQueryFormName=TournamentStatistics"
     player_page = requests.get(player_url)
     player_soup = BeautifulSoup(player_page.content,'html.parser')
-    stats_list = ["Games", "WR", "KDA", "CS/M", "Gold/M"]
+    path = r'C:\Users\Basel\Desktop\coding\ml_sentdex\fiestaBot\playerstats.csv'
+    mydf = pd.read_csv(path)
+    row = mydf[mydf['Player']==playerName]
+    
+    goldpercentage=row['GOLD%']
+   
+    dmgpercentage = row['DMG%']
+    
+    goldpercentage = float(removePercent(goldpercentage.values[0]))/100
+    dmgpercentage = float(removePercent(dmgpercentage.values[0]))/100
+    dmg_per_gold = dmgpercentage/goldpercentage
+    stats_list = ["Games", "WR", "KDA", "CS/M", "Gold/M","Dmg_per_gold" ] #gold %, damage %
     d = {}
     #print((player_soup.prettify()).encode('utf8'))
     table = player_soup.find(lambda tag: tag.name=='table' ) 
@@ -98,6 +115,7 @@ def getPlayerStats(playerName, year,champion ):
                     stats_counter+=1
                 
                 counter+=1
+    d[stats_list[5]] = dmg_per_gold
     return d
 def getChampStats(champion,role):
     champ_url = "https://na.op.gg/champion/" + champion + "/statistics/" + role
@@ -143,5 +161,6 @@ players = ["Licorice","Blaber","Nisqy","Zven","Vulcan%20(Philippe%20Laflamme)"]
 champions = ["Sett","Olaf","Zoe","Ezreal","Thresh"]
 roles = ["Top", "Jungle","Middle","adc","Support"]
 #totalPlayerStats = appendAllStats(players,2020,champions, roles)
-getChampStats("Ashe","adc")
+#getChampStats("Ashe","adc")
+getPlayerStats("Licorice",2020,"Sett")
 #print(totalPlayerStats)

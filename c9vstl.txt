@@ -1,0 +1,15 @@
+Training a LogisticRegression using a training set size of 135. . .
+Trained model in 0.0090 seconds
+Made predictions in 0.0020 seconds.
+0.9906542056074767 0.9925925925925926
+F1 score and accuracy score for training set: 0.9907 , 0.9926.
+Made predictions in 0.0020 seconds.
+F1 score and accuracy score for test set: 0.9474 , 0.9600.
+c9
+      Games        WR       KDA    Gold/M  Dmg_per_gold   Winrate   Gd/min  Avg_game_time      FT_%    Drag_%  Gd_at_15      0-25     25-30     30-35     35-40       40+   O_Games      O_WR     O_KDA  O_Gold/M  O_Dmg_per_gold  O_Winrate  O_Gd/min  O_Avg_game_time    O_FT_%  O_Drag_%  O_Gd_at_15    O_0-25   O_25-30  O_30-35   O_35-40     O_40+
+0 -2.321035 -1.779753 -0.402665 -0.405011     -0.008996  1.709529  2.00572      -2.308947  1.241936  1.586127  1.998461 -5.252994  9.087492  2.705691  1.820424 -2.433283 -0.453972  0.770894  0.332633  0.294857       -1.701708    1.48593  0.874504         0.795526  1.100443 -0.395471    0.508677  0.418225  2.879078  2.40321  1.896565 -0.292734
+flyq
+eg
+      Games       WR       KDA    Gold/M  Dmg_per_gold   Winrate    Gd/min  Avg_game_time      FT_%    Drag_%  Gd_at_15      0-25     25-30     30-35     35-40       40+   O_Games      O_WR     O_KDA  O_Gold/M  O_Dmg_per_gold  O_Winrate  O_Gd/min  O_Avg_game_time    O_FT_%  O_Drag_%  O_Gd_at_15    O_0-25   O_25-30   O_30-35   O_35-40     O_40+
+0 -0.696311  0.94785  1.465991  1.658415       0.44166 -0.703924 -0.242485      -0.336183  1.241936  0.165889 -0.334018  1.140635  0.646295  0.525061  0.803042  0.016929 -2.211283 -1.666635 -1.143629 -0.514639       -1.102551  -0.611854 -0.691772         0.948064 -1.341565  -1.44428   -1.047075  0.295755  1.348173  1.369654  0.000226  0.790106
+clg

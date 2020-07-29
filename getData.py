@@ -12,22 +12,14 @@ from pandas.plotting import scatter_matrix
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import scale
 import re
-# plt.style.use('ggplot')
-# api_key = "RGAPI-d6357266-107b-47e5-bfab-ad0bc266863c"
-# user_url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/Novum?api_key="+api_key
-# match_url = "https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/1L4ebzOq-2tERbxca_G36I6tfKXdfQtdM1ISAQGPMJ5sM04?api_key=" + api_key
-# response = requests.get(user_url)
-# response.json()
-
-# ddragresponse = requests.get("http://ddragon.leagueoflegends.com/cdn/9.3.1/data/en_US/champion.json")
-# ddragresponse.json()
-
-# champRawData = json.loads(ddragresponse.text)
-# crd = champRawData['data']
-# kat_blurb = crd['Katarina']
-# print(kat_blurb)
-def getTeamData(teams_url):
-
+import csv
+from sklearn.model_selection import train_test_split
+from sklearn import svm
+from time import time 
+from sklearn.metrics import f1_score
+#returns a dataframe of a team's winrate, gd/min, avg game time, drag %, gd at 15
+def getTeamData(team):
+    teams_url = "https://gol.gg/teams/list/season-S10/split-Summer/region-NA/tournament-ALL/week-ALL/"
     teams_page = requests.get(teams_url)
 
     #pp.pprint(teams_page.content)
@@ -36,74 +28,100 @@ def getTeamData(teams_url):
     #print((teams_soup.prettify()).encode('utf8'))
     teamlist = teams_soup.find('table', class_='playerslist')
 
-    teams_list = ["100 Thieves", "CLG", "Cloud9", "Dignitas","Evil Geniuses", "FlyQuest", "Golden Guardians", "Immortals", "Team Liquid", "TSM"]
-    stats_list = ["Winrate", "Gd/min","Avg game time",  "Drag %", "GD at 15"]
+    
+    stats_list = ["Winrate", "Gd/min","Avg game time",  "FT %", "Drag %", "GD at 15"]
     d = {}
-    for team in teams_list:
-        d[team] = []
+    
+    d[team] = []
 
         # print((teamlist.prettify()).encode('utf8'))
         # print()
-    for team in teams_list:
-        teamstats = teamlist.find('a',{'title' : team + ' stats'})
-        stats = teamstats.find_all_next("td",limit = 21)
-        #print(teamstats.text)
-        counter = 0
-        listcounter=0
-        for data in stats:
-            if(counter == 3 or counter == 7 or counter == 6 or counter == 15 or counter == 20):
-                #print(stats_list[listcounter] + " "+ data.text)
-                if('%' in data.text):
-                    d[team].append(float(data.text[0:4]))
-                elif ':' in data.text:
-                    min_to_sec = float(data.text[0:2]) * 60
-                    total = min_to_sec + float(data.text[3:5])
-                    d[team].append(total)
-                else:
-                    d[team].append(float(data.text))
-                listcounter+=1
-            counter+=1
+    
+    teamstats = teamlist.find('a',{'title' : team + ' stats'})
+    stats = teamstats.find_all_next("td",limit = 21)
+    #print(teamstats.text)
+    counter = 0
+    listcounter=0
+    for data in stats:
+        if(counter == 3 or counter == 7 or counter == 6 or counter == 15 or counter == 13 or counter == 20):
+            #print(stats_list[listcounter] + " "+ data.text)
+            if('%' in data.text):
+                d[team].append(float(data.text[0:4]))
+            elif ':' in data.text:
+                min_to_sec = float(data.text[0:2]) * 60
+                total = min_to_sec + float(data.text[3:5])
+                d[team].append(total)
+            else:
+                d[team].append(float(data.text))
+            listcounter+=1
+        counter+=1
         #print(d)
 
-    df = pd.DataFrame.from_dict(d, orient = 'index', columns = stats_list)
+    #df = pd.DataFrame.from_dict(d, orient = 'index', columns = stats_list)
     # df = pd.DataFrame(numpy.random.randn(1000, 4), columns=['A','B','C','D'])
     #scatter_matrix(df, alpha=0.2)
     # pd.plotting.scatter_matrix(df, diagonal = 'kde')
     #plt.show()
-    return df
-        
-    #print(teams_html)
+    return d
+
+#removes the percent sign from a string 
 def removePercent(my_str):
     index = my_str.find('%')
     new_str = ""
     for i in range(index):
         new_str= new_str +(my_str[i])
     return new_str
-def getPlayerStats(playerName, year,champion ):
+#returns dictionary of player # games, wr, kda, cs/min, gold/min, dmg per gold %
+def getPlayerStats(playerName, year,champion,playername_oracle ):
+    if(playerName =="Vulcan"):
+        playerName = "Vulcan%20(Philippe%20Laflamme)"
+    elif playerName == "Closer":
+        playerName = "Closer%20(Can%20Çelik)"
+    elif playerName == "Apollo":
+        playerName = "Apollo%20(Apollo%20Price)"
+    elif playerName == "Wind":
+        playerName = "Wind%20(Oh%20Myeong-jin)"
+    elif playerName == "Solo":
+        playerName = "Solo%20(Colin%20Earnest)"
+    elif playerName == "Deus":
+        playerName = "Deus%20(Alexey%20Zatorski)"
     player_url = "https://lol.gamepedia.com/Special:RunQuery/TournamentStatistics?TS%5Bpreload%5D=PlayerByChampion&TS%5Byear%5D=" + str(year) + "&TS%5Bspl%5D=Yes&TS%5Blink%5D=" + playerName + "&pfRunQueryFormName=TournamentStatistics"
     player_page = requests.get(player_url)
     player_soup = BeautifulSoup(player_page.content,'html.parser')
     path = r'C:\Users\Basel\Desktop\coding\ml_sentdex\fiestaBot\playerstats.csv'
     mydf = pd.read_csv(path)
-    row = mydf[mydf['Player']==playerName]
+    #print("Name: " +playername_oracle)
+    row = mydf[mydf['Player']==playername_oracle]
+    goldpercentage = 1
+    dmgpercentage = 1
     
-    goldpercentage=row['GOLD%']
-   
-    dmgpercentage = row['DMG%']
+
     
-    goldpercentage = float(removePercent(goldpercentage.values[0]))/100
-    dmgpercentage = float(removePercent(dmgpercentage.values[0]))/100
+    if row.size != 0:
+        goldpercentage=row['GOLD%']
+        dmgpercentage = row['DMG%']
+        goldpercentage = float(removePercent(goldpercentage.values[0]))/100
+        dmgpercentage = float(removePercent(dmgpercentage.values[0]))/100
     dmg_per_gold = dmgpercentage/goldpercentage
-    stats_list = ["Games", "WR", "KDA", "CS/M", "Gold/M","Dmg_per_gold" ] #gold %, damage %
+    stats_list = ["Player","Champion","Games", "WR", "KDA", "CS/M", "Gold/M","Dmg_per_gold" ] #gold %, damage %
     d = {}
     #print((player_soup.prettify()).encode('utf8'))
     table = player_soup.find(lambda tag: tag.name=='table' ) 
     rows = table.findAll(lambda tag: tag.name=='tr')
+    
+    d[stats_list[0]]= playername_oracle
+    d[stats_list[1]]= champion
     for row in rows:
+        if champion == "Vel'koz":
+            champion = "Vel'Koz"
+        if champion == "Cho'gath":
+            champion = "Cho'Gath"
+        if champion == "Kha'zix":
+            champion = "Kha'Zix"
         if champion in row.text:
             cols = row.findAll(lambda tag: tag.name == 'td')
             counter = 0
-            stats_counter = 0
+            stats_counter = 2
             for col in cols:
                 if(counter == 1 or counter == 4 or counter == 8 or counter == 10 or counter == 12):
                     
@@ -115,8 +133,28 @@ def getPlayerStats(playerName, year,champion ):
                     stats_counter+=1
                 
                 counter+=1
-    d[stats_list[5]] = dmg_per_gold
+    d[stats_list[7]] = dmg_per_gold
+    
     return d
+#returns a dictionary of champion winrate in role at min 0-25, 25-30, 30-35, 35-40, 40+
+def getAllChampStats():
+    ddragresponse = requests.get("http://ddragon.leagueoflegends.com/cdn/9.3.1/data/en_US/champion.json")
+    ddragresponse.json()
+
+    champRawData = json.loads(ddragresponse.text)
+    crd = champRawData['data']
+    
+    counter = 0
+    for champ in crd:
+        counter+=1
+    champ_arr = numpy.empty([counter,1],dtype = object)
+    index = 0
+    for champ in crd:
+        champ_arr[index] = champ
+        index +=1
+    return champ_arr
+       
+# print(kat_blurb)
 def getChampStats(champion,role):
     champ_url = "https://na.op.gg/champion/" + champion + "/statistics/" + role
     champ_page = requests.get(champ_url)
@@ -125,7 +163,9 @@ def getChampStats(champion,role):
     #print(champ_soup.encode('utf8'))
     #print()
     counter = 0
-    winrates = []
+    times = ["0-25","25-30","30-35","35-40","40+"]
+    #print("Champion: " + champion)
+    winrates = {}
     for sibling in winrateByLength:
         if counter == 1:
             strsib = str(sibling.encode('utf8'))
@@ -133,34 +173,416 @@ def getChampStats(champion,role):
             yindex = strsib.find(start_substr)
             matches = re.finditer(start_substr, strsib)
             matches_positions = [match.start() for match in matches]
+            #print("Champion " + champion + ", Role: " + role)
+            #print(matches_positions)
             for i in range(5):
                 startindex = matches_positions[i]+4
                 wr_num = ""
                 temp = strsib[startindex]
                 tempcount = 0
-                while(temp != ',' and tempcount <5):
-                    wr_num= wr_num+(strsib[startindex + tempcount])
-                    temp = strsib[startindex+tempcount]
+                while(temp != ',' and temp != '}' and tempcount <5):
+                    wr_num= wr_num+(temp)
                     tempcount+=1
-                winrates.append(str(wr_num))
+                    temp = strsib[startindex+tempcount]
+                    
+                winrates[times[i]] = float(str(wr_num))
 
         counter+=1
+   
     return winrates
 
-def appendAllStats(players, year, champions,roles):
-    totalPlayerStats = pd.DataFrame()
-    for i in range(len(players)):
-        playerStats = getPlayerStats(players[i],year,champions[i])
-        champStats = getChampStats(champions[i],roles[i])
-        totalPlayerStats = totalPlayerStats.append(playerStats,ignore_index = True)
-    return totalPlayerStats
+def getTeamPlayersData(roster,champions,roles, year, playerNames_oracle, team, is_opponent):
+    #size = 13 features
+    stats_list_1 = ["Games","WR","KDA", "Gold/M","Dmg_per_gold"]
+    stats_list_2=[ "Winrate","Gd/min","Avg_game_time", "FT_%","Drag_%","Gd_at_15"]
+    stats_list_3 = ["0-25","25-30","30-35","35-40","40+"]
+    O_stats_list_1 = ["O_Games","O_WR","O_KDA", "O_Gold/M","O_Dmg_per_gold"]
+    O_stats_list_2=[ "O_Winrate","O_Gd/min","O_Avg_game_time", "O_FT_%","O_Drag_%","O_Gd_at_15"]
+    O_stats_list_3 = ["O_0-25","O_25-30","O_30-35","O_35-40","O_40+"]
+    teamDataDict = {}
+    if(is_opponent == False):
+        O_stats_list_1 = stats_list_1
+        O_stats_list_2 = stats_list_2
+        O_stats_list_3 = stats_list_3
+    
+    for i in range(len(stats_list_1)):
+        teamDataDict[O_stats_list_1[i]] = 0
+    for i in range(len(stats_list_2)):
+        teamDataDict[O_stats_list_2[i]] = 0
+    for i in range(len(stats_list_3)):
+        teamDataDict[O_stats_list_3[i]] = 0
+    
 
-teams_url = "https://gol.gg/teams/list/season-S10/split-Summer/region-NA/tournament-ALL/week-ALL/"
-team_df = getTeamData(teams_url)
-players = ["Licorice","Blaber","Nisqy","Zven","Vulcan%20(Philippe%20Laflamme)"]
-champions = ["Sett","Olaf","Zoe","Ezreal","Thresh"]
+    for i in range(len(roster)):
+        playerStats = getPlayerStats(roster[i],year,champions[i],playerNames_oracle[i])
+        # print(playerStats)
+        for j in range(len(stats_list_1)):
+            # print(O_stats_list_1[j])
+            # print(stats_list_1[j])
+            #print(roster[i])
+            teamDataDict[O_stats_list_1[j]] += playerStats[stats_list_1[j]]
+    for i in range(len(stats_list_1)):
+        teamDataDict[O_stats_list_1[i]] /= 5
+    
+    if(team == "Counter Logic Gaming"):
+        team = "CLG"
+    if(team == "Team SoloMid"):
+        team = "TSM"
+    teamStats = getTeamData(team)
+    for i in range(len(teamStats[team])):
+        teamDataDict[O_stats_list_2[i]] = teamStats[team][i]
+    champStats = [0,0,0,0,0]
+    for i in range(len(champions)):
+        curr_ChampStats = getChampStats(champions[i],roles[i])
+        for j in range(len(champStats)):
+            champStats[j] += curr_ChampStats[stats_list_3[j]]
+    champStats[:] = [x / 5 for x in champStats ]
+    for i in range(len(champStats)):
+        teamDataDict[O_stats_list_3[i]] = champStats[i]
+    return teamDataDict
+
+#returns a dictionary of all features
+def appendAllStats(roster1,roster2, year, champions1,champions2,roles,roster1_oracle,roster2_oracle,team1,team2):
+    is_opponent1 = False
+    is_opponent2 = True
+    first_team_dict = getTeamPlayersData(roster1,champions1,roles,year,roster1_oracle,team1,is_opponent1)
+    second_team_dict = getTeamPlayersData(roster2,champions2,roles,year,roster2_oracle,team2,is_opponent2)
+    totalfeatures = {**first_team_dict, **second_team_dict}
+    #print(first_team_dict)
+    #print(second_team_dict)
+    return totalfeatures
+    # totalStats = pd.DataFrame()
+    # totalPlayerStats = pd.DataFrame()
+    # for i in range(len(players)):
+    #     playerStats = getPlayerStats(players[i],year,champions[i],players_oracle[i])
+    #     totalPlayerStats = totalPlayerStats.append(playerStats,ignore_index = True)
+    # totalStats.append(totalPlayerStats,ignore_index=True)
+    # totalChampStats = pd.DataFrame()
+    # for i in range(len(champions)):
+    #     champStats = getChampStats(champions[i],roles[i])
+    #     totalChampStats= totalChampStats.append(champStats,ignore_index=True)
+    # totalStats.append(totalChampStats,ignore_index=True)
+    # frames = [totalPlayerStats, totalChampStats]
+
+    # result = pd.concat(frames, axis = 1)
+    # return result
+
+def combineGames(filename):
+    temp_team_list_1 = []
+    temp_team_list_2 = []
+    team1_list = []
+    team2_list = []
+    temp_champ_list_1 = []
+    temp_champ_list_2 = []
+    team1_champs = []
+    team2_champs = []
+    outcome_list = []
+    team_list_1 = []
+    team_list_2=[]
+    temp_outcome_list = []
+    first = True
+    with open(filename, newline = '') as csvfile:
+        readCSV = csv.reader(csvfile,delimiter = ',')
+        first = True
+        counter = 0
+       # gamecounter = 0
+     
+        for row in readCSV:
+        
+            
+            if first == True:
+                first = False
+                continue
+            if(counter == 10):
+                counter+=1
+                team_list_1.append(row[14])
+                
+                temp_outcome_list.append(row[22])
+            elif counter == 11:
+                team1_list.append(temp_team_list_1)
+                team2_list.append(temp_team_list_2)
+                team1_champs.append(temp_champ_list_1)
+                team2_champs.append(temp_champ_list_2)
+                temp_outcome_list.append(row[22])
+                team_list_2.append(row[14])
+                outcome_list.append(temp_outcome_list)
+                temp_team_list_1 = []
+                temp_team_list_2 = []
+                temp_champ_list_1 = []
+                temp_champ_list_2 = []
+                temp_outcome_list = []
+                #gamecounter+=1
+                counter = 0
+            elif counter < 5:
+                temp_team_list_1.append(row[13])
+                temp_champ_list_1.append(row[15])
+               
+                counter+=1
+            else:
+                temp_team_list_2.append(row[13])
+                temp_champ_list_2.append(row[15])
+               
+                counter+=1
+            
+           
+    
+    result = [team1_list,team2_list,team1_champs,team2_champs,outcome_list,team_list_1,team_list_2]
+    return result
+
+    # frames = []
+    # for game in games:
+    #     frames.append(pd.DataFrame.from_dict(game))
+    # result = pd.concat(frames)
+    # return result
+#team_df = getTeamData("CLG")
+
+def createTrainTestSets(gamePlayers1,gamePlayers2,gameChampions1,gameChampions2,gameOutcomes,teamList1,teamList2, year,roles):
+    output = pd.DataFrame()
+    for i in range(len(gamePlayers1)):
+        roster1 = gamePlayers1[i]
+        roster2 = gamePlayers2[i]
+        champions1 = gameChampions1[i]
+        champions2 = gameChampions2[i]
+        team1 = teamList1[i]
+        team2=teamList2[i]
+        example = appendAllStats(roster1,roster2,year, champions1,champions2,roles,roster1,roster2,team1,team2)
+        if gameOutcomes[i][0] == '1':
+            example["Outcome"] = 0
+        else:
+            example["Outcome"] = 1
+        #print(example)
+        output = output.append(example,ignore_index=True)
+    #print(output)
+    return output
+
+
+def train_classifier(clf, X_train, y_train):
+    ''' Fits a classifier to the training data. '''
+    
+    # Start the clock, train the classifier, then stop the clock
+    start = time()
+    clf.fit(X_train, y_train)
+    end = time()
+    
+    # Print the results
+    print ("Trained model in {:.4f} seconds".format(end - start))
+
+    
+def predict_labels(clf, features, target):
+    ''' Makes predictions using a fit classifier based on F1 score. '''
+    
+    # Start the clock, make predictions, then stop the clock
+    start = time()
+    y_pred = clf.predict(features)
+    
+    end = time()
+    # Print and return results
+    print ("Made predictions in {:.4f} seconds.".format(end - start))
+    
+    return f1_score(target, y_pred, pos_label= 1), sum(target == y_pred) / float(len(y_pred))
+
+def make_prediction(clf,features, team1, team2):
+    y_pred = clf.predict(features)
+    if y_pred == 1:
+        print(team2)
+    else:
+        print(team1)
+def train_predict(clf, X_train, y_train, X_test, y_test):
+    ''' Train and predict using a classifer based on F1 score. '''
+    
+    # Indicate the classifier and the training set size
+    print ("Training a {} using a training set size of {}. . .".format(clf.__class__.__name__, len(X_train)))
+    
+    # Train the classifier
+    train_classifier(clf, X_train, y_train)
+    
+    # Print the results of prediction for both training and testing
+    f1, acc = predict_labels(clf, X_train, y_train)
+    print (f1, acc)
+    print ("F1 score and accuracy score for training set: {:.4f} , {:.4f}.".format(f1 , acc))
+    
+    f1, acc = predict_labels(clf, X_test, y_test)
+    print ("F1 score and accuracy score for test set: {:.4f} , {:.4f}.".format(f1 , acc))
+
+def read_training_set(filename):
+    df = pd.read_table(filename, delim_whitespace=True,header=0)
+    return df
+def read_training_labels(filename):
+    df = pd.read_table(filename, delim_whitespace=True,header=0) 
+    return df
+def featurescaling(example,filename,X_all):
+    colnames = []
+    for col in X_all.columns:
+        colnames.append(col) 
+    means = {}
+    stds = {}
+    unscaled = read_training_set(filename)
+    for name in colnames:
+        mean = sum(unscaled[name])/len(unscaled[name])
+        means[name] = mean
+        variance = sum([((x - mean) ** 2) for x in unscaled[name]]) / len(unscaled[name]) 
+        res = variance ** 0.5
+        stds[name] = res
+
+    for ind in example.index:
+        for name in colnames:
+            temp = example[name][ind] 
+            #print(temp)
+            tempmean = means[name]
+            
+            tempstd = stds[name]
+            
+            example[name][ind] = (temp - tempmean)/tempstd
+    return [means,stds]
+def alreadytrained(filename,y_filename):
+
+    
+    X_all = read_training_set(filename)
+    y_all = read_training_labels(y_filename)
+    X_all = X_all.astype(float)
+    y_all = y_all.astype(float)
+    y_all = y_all["Y_Values"]
+    teams_list = ["100 Thieves", "CLG", "Cloud9", "Dignitas","Evil Geniuses", "FlyQuest", "Golden Guardians", "Immortals", "Team Liquid", "TSM"]
+    clg = ["Ruin","Wiggily","Pobelter","Stixxay","Smoothie"]
+    dig = ["V1per","Dardoch","Fenix","Johnsun","Aphromoo"]
+    tl = ["Impact","Broxah","Jensen","Tactical","CoreJJ"]
+    cloud9 = ["Licorice","Blaber","Nisqy","Zven","Vulcan%20(Philippe%20Laflamme)"]
+    eg = ["Huni","Svenskeren","Goldenglue","Bang","Zeyzal"]
+    imt = ["Allorim","Xmithie","Insanity","Apollo","Hakuho"]
+    cloud9_oracle = ["Licorice","Blaber","Nisqy","Zven","Vulcan"]
+    players_oracle = ["Licorice","Blaber","Nisqy","Zven","Vulcan", "Ruin","Wiggily","Pobelter","Stixxay","Smoothie"]
+    champions = ["Wukong","Lee Sin","Rumble","Ezreal","Rakan","Malphite","Trundle","Syndra","Aphelios","Nautilus"]
+    dig_champs = ["Volibear","Graves","Orianna","Ashe","Blitzcrank"]
+    flyq = ["Solo","Santorin","PowerOfEvil","WildTurtle","igNar"]
+
+    c9_champs = ["Shen","Hecarim","Sett","Sona","Lux"]
+    tl_champs = ["Mordekaiser","Trundle","Syndra","Ezreal","Bard"]
+    
+
+    #badfeatures = ["0-25","25-30","30-35","35-40","40+","O_0-25","O_25-30","O_30-35","O_35-40","O_40+"] 
+
+    example1 = appendAllStats(cloud9,tl,2020, c9_champs,tl_champs,roles,cloud9,tl,"Cloud9","Team Liquid")
+    example1 = pd.DataFrame(example1,index=[0])
+
+    featurescaling(example1,"unscaledvalues.txt",X_all)
+
+    make_prediction(clf_A,example1,"c9","tl")
+    print(example1)
+
+    tl_champs2 = ["Kennen","Volibear","Zoe","Ezreal","Bard"]
+    flyq_champs = ["Renekton","Sett","Orianna","Ashe","Rakan"]
+    example2 = appendAllStats(tl,flyq,2020, tl_champs2,flyq_champs,roles,tl,flyq,"Team Liquid","FlyQuest")
+    example2 = pd.DataFrame(example2,index=[0])
+    featurescaling(example2,"unscaledvalues.txt",X_all)
+
+    make_prediction(clf_A,example2,"tl","flyq")
+
+    eg_champs = ["Gangplank","Volibear","Zoe","Aphelios","Alistar"]
+    imt_champs = ["Urgot","Graves","Azir","Ashe","Braum"]
+    example3 = appendAllStats(eg,imt,2020, eg_champs,imt_champs,roles,eg,imt,"Evil Geniuses","Immortals")
+    example3 = pd.DataFrame(example3,index=[0])
+    featurescaling(example3,"unscaledvalues.txt",X_all)
+
+    make_prediction(clf_A,example3,"eg","imt")
+
+    hundredt = ["Ssumday","Contractz","Ryoma","Cody Sun","Poome"]
+    hundredt_champs = ["Wukong","Graves","Galio","Ashe","Thresh"]
+    clg_champs = ["Kennen","Sett","Orianna","Xayah","Bard"]
+    example4 = appendAllStats(hundredt,clg,2020, hundredt_champs,clg_champs,roles,hundredt,clg,"100 Thieves","CLG")
+    example4 = pd.DataFrame(example4,index=[0])
+
+    featurescaling(example4,"unscaledvalues.txt",X_all)
+    print(example4)
+    make_prediction(clf_A,example4,"100t","clg")
+def retrain(year,roles):
+    
+    result = combineGames("debugging_set.csv")
+
+    gamePlayers1 = result[0]
+    gamePlayers2 = result[1]
+    gameChampions1 = result[2]
+    gameChampions2 = result[3]
+    gameOutcomes = result[4]
+    teamList1 = result[5]
+    teamList2 = result[6]
+    output = createTrainTestSets(gamePlayers1,gamePlayers2,gameChampions1,gameChampions2,gameOutcomes,teamList1,teamList2,year,roles)
+    colnames = []
+
+
+
+    X_all = output.drop(["Outcome"],1)
+    for col in X_all.columns:
+        colnames.append(col)
+    y_all = output["Outcome"]
+    print("Y Values")
+    print(y_all)
+    print()
+    print("X Values")
+    print(X_all)
+    print()
+    print("X values scaled")
+    for col in colnames:
+        X_all[col] = scale(X_all[col])
+    print(X_all)
+    return[X_all,y_all]
+#team = getTeamPlayersData(clg, clg_champs, roles, 2020, clg, "CLG")
+#print(team)
+#totalStats = appendAllStats(clg,cloud9, 2020,clg_champs,c9_champs,roles, clg,cloud9_oracle,"CLG","Cloud9")
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_rows', 500)
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 1000)
+
+#Uncomment if you want to get new training set 
 roles = ["Top", "Jungle","Middle","adc","Support"]
-#totalPlayerStats = appendAllStats(players,2020,champions, roles)
+[X_all,y_all] = retrain(2020,roles)
+#uncomment if you have already trained data
+#alreadytrained("fulldataset.csv","y_input.txt","x_input.txt")
+
+X_train,X_test,y_train,y_test = train_test_split(X_all,y_all,test_size=10,random_state=2,stratify=y_all)
+
+clf_A = LogisticRegression(random_state = 42)
+train_predict(clf_A,X_train,y_train,X_test,y_test)
+
+# filename = "x_input.txt"
+# y_filename = "y_input.txt"
+
+#TODO
+#add derivative of last 5 games to obtain a teams "trend"
+#if player has never play4ed champ before, take overall stats of champ in pro play combined with the players overall stats
+#see how the model is affected if we just take the difference of the equivalent features for team 1 and team 2
+
+
+
+
+
+#totalStats = pd.DataFrame(totalStats, index=[0])
+#print(totalStats)
+#totalStatsNumerical = totalStats.drop(["Player","Champion"], axis = 1)
+#print(result)
+#output.drop(output.columns.difference(["0-25","25-30","30-35","35-40","40+","O_0-25","O_25-30","O_30-35","O_35-40","O_40+","Outcome"]), 1, inplace=True)
+# print(output)
+# scatter_matrix(output, diagonal = 'kde')
+# plt.show()
+# pd.set_option("display.max_rows", None, "display.max_columns", None) # more options can be specified also
+# #print(totalStats)
 #getChampStats("Ashe","adc")
-getPlayerStats("Licorice",2020,"Sett")
+#getPlayerStats("Licorice",2020,"Sett")
 #print(totalPlayerStats)
+
+
+# import mwclient
+# import time
+# import datetime as dt
+# from datetime import date, timedelta
+# site = mwclient.Site('lol.gamepedia.com', path='/')
+
+# response = site.api('RunQuery',
+# 	limit = 'max',
+# 	tables = "ScoreboardGames=SG, ScoreboardPlayers=SP",
+#     join_on = "SG.UniqueGame=SP.UniqueGame",
+# 	fields = "SG.Tournament, SG.DateTime_UTC, SG.Team1, SG.Team2, SG.Winner, SG.Patch, SP.Link, SP.Team, SP.Champion, SP.SummonerSpells, SP.KeystoneMastery, SP.KeystoneRune, SP.Role, SP.UniqueGame, SP.Side",
+# 	where = "SG.DateTime_UTC >= '2020-01-01 00:00:00'" #Results after Aug 1, 2019
+# )
+# print(response)

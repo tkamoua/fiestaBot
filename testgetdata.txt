@@ -1,0 +1,3 @@
+Training a LogisticRegression using a training set size of 135. . .
+Trained model in 0.0090 seconds
+Made predictions in 0.0020 seconds.

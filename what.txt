@@ -1,0 +1,10 @@
+Training a LogisticRegression using a training set size of 135. . .
+Trained model in 0.0100 seconds
+Made predictions in 0.0020 seconds.
+0.9906542056074767 0.9925925925925926
+F1 score and accuracy score for training set: 0.9907 , 0.9926.
+Made predictions in 0.0020 seconds.
+F1 score and accuracy score for test set: 0.9474 , 0.9600.
+   Games   WR  KDA  Gold/M  Dmg_per_gold  Winrate  Gd/min  Avg game time  FT %  Drag %  Gd at 15  0-25  25-30  30-35  35-40  40+  O_Games  O_WR  O_KDA  O_Gold/M  O_Dmg_per_gold  O_Winrate  O_Gd/min  O_Avg game time  O_FT %  O_Drag %  O_Gd at 15  O_0-25  O_25-30  O_30-35  O_35-40  O_40+
+0    0.0  0.0  0.0     0.0           0.0      0.0     0.0            0.0   0.0     0.0       0.0   0.0    0.0    0.0    0.0  0.0      0.0   0.0    0.0       0.0             0.0        0.0       0.0              0.0     0.0       0.0         0.0     0.0      0.0      0.0      0.0    0.0
+tl

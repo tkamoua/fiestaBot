@@ -1,0 +1,20 @@
+Training a LogisticRegression using a training set size of 111. . .
+Trained model in 0.0070 seconds
+Made predictions in 0.0020 seconds.
+0.9772727272727273 0.9819819819819819
+F1 score and accuracy score for training set: 0.9773 , 0.9820.
+Made predictions in 0.0010 seconds.
+F1 score and accuracy score for test set: 0.9333 , 0.9459.
+Winner of c9 vs tl = c9
+      Games        WR       KDA    Gold/M  Dmg_per_gold   Winrate   Gd/min  Avg_game_time      FT_%    Drag_%  Gd_at_15      0-25     25-30     30-35     35-40       40+   O_Games      O_WR     O_KDA  O_Gold/M  O_Dmg_per_gold  O_Winrate  O_Gd/min  O_Avg_game_time    O_FT_%  O_Drag_%  O_Gd_at_15    O_0-25   O_25-30   O_30-35   O_35-40     O_40+
+0 -2.321035 -1.779753 -0.402665 -0.405011     -0.008996  1.709529  2.00572      -2.308947  1.241936  1.586127  1.998461  1.263747 -0.257013  1.397823  0.999361  1.536128 -0.453972  0.770894  0.332633  0.294857       -1.701708    1.48593  0.874504         0.795526  1.100443 -0.395471    0.508677  1.346952  0.057951  1.017479 -0.086546  0.172214
+Winner of tl vs flyq = tl
+Winner of eg vs imt = eg
+Winner of 100t vs clg = 100t
+      Games        WR      KDA    Gold/M  Dmg_per_gold   Winrate    Gd/min  Avg_game_time      FT_%    Drag_%  Gd_at_15      0-25     25-30     30-35     35-40      40+   O_Games     O_WR     O_KDA  O_Gold/M  O_Dmg_per_gold  O_Winrate  O_Gd/min  O_Avg_game_time  O_FT_%  O_Drag_%  O_Gd_at_15    O_0-25   O_25-30   O_30-35  O_35-40     O_40+
+0 -0.812362  1.482992  0.11229  1.445251      0.082519  0.905045  0.399859       0.114524  2.106154 -0.012611 -0.125701 -0.476239 -2.220202 -0.356633  0.006518  0.25379 -1.039742 -1.15054 -0.909945  0.303561        0.052301  -0.959039 -0.857613        -0.416301 -0.8559  -0.56016    -0.61858  0.618939  0.955583  1.588615 -1.07991 -0.827424
+Winner of tsm vs dig = dig
+Winner of gg vs flyq = gg
+Winner of imt vs c9 = c9
+Winner of dig vs eg = dig
+Winner of clg vs tsm = clg

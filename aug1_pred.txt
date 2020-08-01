@@ -1,0 +1,68 @@
+Training a LogisticRegression using a training set size of 125. . .
+Trained model in 0.0080 seconds
+Made predictions in 0.0020 seconds.
+0.9583333333333333 0.968
+F1 score and accuracy score for training set: 0.9583 , 0.9680.
+Made predictions in 0.0020 seconds.
+F1 score and accuracy score for test set: 0.8571 , 0.8833.
+{'Player': 'Licorice', 'Champion': 'Sett', 'Games': 9.0, 'WR': 88.9, 'KDA': 3.95, 'CS/M': 7.84, 'Gold/M': 400.0, 'Dmg_per_gold': 1.1629955947136565}
+Sett
+Sett
+Sett
+Sett
+Sett
+{'Player': 'Blaber', 'Champion': 'Trundle', 'Games': 1.0, 'WR': 100.0, 'KDA': 5.33, 'CS/M': 5.85, 'Gold/M': 376.0, 'Dmg_per_gold': 0.8177339901477833}
+Trundle
+Trundle
+Trundle
+Trundle
+Trundle
+{'Player': 'Nisqy', 'Champion': 'Zoe', 'Games': 10.0, 'WR': 90.0, 'KDA': 12.78, 'CS/M': 7.56, 'Gold/M': 398.0, 'Dmg_per_gold': 1.0648148148148147}
+Zoe
+Zoe
+Zoe
+Zoe
+Zoe
+{'Player': 'Zven', 'Champion': 'Aphelios', 'Games': 11.0, 'WR': 100.0, 'KDA': 10.64, 'CS/M': 9.59, 'Gold/M': 469.0, 'Dmg_per_gold': 0.9137254901960785}
+Aphelios
+Aphelios
+Aphelios
+Aphelios
+Aphelios
+{'Player': 'Vulcan%20(Philippe%20Laflamme)', 'Champion': 'Nautilus', 'Games': 7.0, 'WR': 100.0, 'KDA': 9.86, 'CS/M': 0.98, 'Gold/M': 251.0, 'Dmg_per_gold': 1.0}
+Nautilus
+Nautilus
+Nautilus
+Nautilus
+Nautilus
+{'Player': 'Hauntzer', 'Champion': 'Maokai', 'Games': 1.0, 'WR': 0.0, 'KDA': 0.0, 'CS/M': 8.61, 'Gold/M': 331.0, 'Dmg_per_gold': 1.1145374449339207}
+Maokai
+Maokai
+Maokai
+Maokai
+Maokai
+{'Player': 'Closer', 'Champion': 'Volibear', 'Games': 2.0, 'WR': 0.0, 'KDA': 1.5, 'CS/M': 4.57, 'Gold/M': 268.0, 'Dmg_per_gold': 0.7015706806282723}
+Volibear
+Volibear
+Volibear
+Volibear
+Volibear
+{'Player': 'Damonte', 'Champion': 'Syndra', 'Games': 3.0, 'WR': 66.7, 'KDA': 33.0, 'CS/M': 9.86, 'Gold/M': 433.0, 'Dmg_per_gold': 0.9399141630901285}
+Syndra
+Syndra
+Syndra
+Syndra
+Syndra
+{'Player': 'FBI', 'Champion': 'Kalista', 'Games': 3.0, 'WR': 33.3, 'KDA': 3.17, 'CS/M': 9.83, 'Gold/M': 416.0, 'Dmg_per_gold': 1.1518518518518517}
+Kalista
+Kalista
+Kalista
+Kalista
+Kalista
+{'Player': 'huhi', 'Champion': 'Thresh', 'Games': 5.0, 'WR': 20.0, 'KDA': 2.14, 'CS/M': 0.98, 'Gold/M': 215.0, 'Dmg_per_gold': 1.0506329113924051}
+Thresh
+Thresh
+Thresh
+Thresh
+Thresh
+Winner of Cloud9 vs Golden Guardians = Golden Guardians

@@ -1,0 +1,33 @@
+Training a LogisticRegression using a training set size of 125. . .
+Trained model in 0.0180 seconds
+Made predictions in 0.0020 seconds.
+0.9583333333333333 0.968
+F1 score and accuracy score for training set: 0.9583 , 0.9680.
+Made predictions in 0.0010 seconds.
+F1 score and accuracy score for test set: 0.8571 , 0.8833.
+{'Player': 'Huni', 'Champion': 'Kennen', 'Games': 1.0, 'WR': 0.0, 'KDA': 1.5, 'CS/M': 9.89, 'Gold/M': 389.0, 'Dmg_per_gold': 1.280334728033473}
+Kennen
+Kennen
+Kennen
+Kennen
+Kennen
+{'Player': 'Svenskeren', 'Champion': 'Graves', 'Games': 2.0, 'WR': 0.0, 'KDA': 0.7, 'CS/M': 6.07, 'Gold/M': 311.0, 'Dmg_per_gold': 0.6886227544910181}
+Graves
+Graves
+Graves
+Graves
+Graves
+{'Player': 'Goldenglue', 'Champion': 'Zoe', 'Games': 10.0, 'WR': 50.0, 'KDA': 2.67, 'CS/M': 7.71, 'Gold/M': 357.0, 'Dmg_per_gold': 0.9957081545064377}
+Zoe
+Zoe
+Zoe
+Zoe
+Zoe
+{'Player': 'Bang', 'Champion': 'Ashe', 'Games': 2.0, 'WR': 50.0, 'KDA': 3.5, 'CS/M': 9.47, 'Gold/M': 406.0, 'Dmg_per_gold': 1.25}
+Ashe
+Ashe
+Ashe
+Ashe
+Ashe
+{'Player': 'Zeyzal', 'Champion': 'Senna', 'Dmg_per_gold': 1.2022471910112358}
+Senna

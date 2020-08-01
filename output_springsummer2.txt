@@ -1,0 +1,149 @@
+<td class="spstats-subject"><img alt="OlafSquare.png" data-file-height="120" data-file-width="120" decoding="async" height="20" src="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/2/2b/OlafSquare.png/20px-OlafSquare.png?version=e35ca2814c73054b4a5ceda99cf4b72f" srcset="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/2/2b/OlafSquare.png/30px-OlafSquare.png?version=e35ca2814c73054b4a5ceda99cf4b72f 1.5x, https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/2/2b/OlafSquare.png/40px-OlafSquare.png?version=e35ca2814c73054b4a5ceda99cf4b72f 2x" width="20"/> Olaf</td>
+<td><a class="external text" href="https://lol.gamepedia.com/Special:RunQuery/MatchHistoryPlayer?MHP%5Bpreload%5D=Champion&amp;MHP%5Byear%5D=2020&amp;MHP%5Blink%5D=Meteos&amp;MHP%5Bchampion%5D=Olaf&amp;MHP%5Bspl%5D=Yes&amp;pfRunQueryFormName=MatchHistoryPlayer" rel="noreferrer noopener" target="_blank">5</a></td>
+<td>1</td>
+<td>4</td>
+<td>20%</td>
+<td>1.6</td>
+<td>4.6</td>
+<td>4</td>
+<td>1.22</td>
+<td>189.2</td>
+<td>5.28</td>
+<td><span class="gold-as-thousands">10.8</span></td>
+<td>303</td>
+<td>53.8%</td>
+<td>15.4%</td>
+<td>17.9%</td>
+<td class="spstats-subject"><img alt="ZoeSquare.png" data-file-height="120" data-file-width="120" decoding="async" height="20" src="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/b/b8/ZoeSquare.png/20px-ZoeSquare.png?version=dec4fff444f8b605edb63dc8fa9ac84e" srcset="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/b/b8/ZoeSquare.png/30px-ZoeSquare.png?version=dec4fff444f8b605edb63dc8fa9ac84e 1.5x, https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/b/b8/ZoeSquare.png/40px-ZoeSquare.png?version=dec4fff444f8b605edb63dc8fa9ac84e 2x" width="20"/> Zoe</td>
+<td><a class="external text" href="https://lol.gamepedia.com/Special:RunQuery/MatchHistoryPlayer?MHP%5Bpreload%5D=Champion&amp;MHP%5Byear%5D=2020&amp;MHP%5Blink%5D=Ryoma&amp;MHP%5Bchampion%5D=Zoe&amp;MHP%5Bspl%5D=Yes&amp;pfRunQueryFormName=MatchHistoryPlayer" rel="noreferrer noopener" target="_blank">6</a></td>
+<td>3</td>
+<td>3</td>
+<td>50%</td>
+<td>2.67</td>
+<td>1.83</td>
+<td>4.5</td>
+<td>3.91</td>
+<td>237.83</td>
+<td>7.19</td>
+<td><span class="gold-as-thousands">11.5</span></td>
+<td>349</td>
+<td>76.8%</td>
+<td>28.6%</td>
+<td>20.9%</td>
+<td class="spstats-subject"><img alt="EzrealSquare.png" data-file-height="120" data-file-width="120" decoding="async" height="20" src="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/c/c3/EzrealSquare.png/20px-EzrealSquare.png?version=17b3d0a6f94ec751ebfe8c51c0cf868c" srcset="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/c/c3/EzrealSquare.png/30px-EzrealSquare.png?version=17b3d0a6f94ec751ebfe8c51c0cf868c 1.5x, https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/c/c3/EzrealSquare.png/40px-EzrealSquare.png?version=17b3d0a6f94ec751ebfe8c51c0cf868c 2x" width="20"/> Ezreal</td>
+<td><a class="external text" href="https://lol.gamepedia.com/Special:RunQuery/MatchHistoryPlayer?MHP%5Bpreload%5D=Champion&amp;MHP%5Byear%5D=2020&amp;MHP%5Blink%5D=Cody%20Sun&amp;MHP%5Bchampion%5D=Ezreal&amp;MHP%5Bspl%5D=Yes&amp;pfRunQueryFormName=MatchHistoryPlayer" rel="noreferrer noopener" target="_blank">3</a></td>
+<td>1</td>
+<td>2</td>
+<td>33.3%</td>
+<td>3.67</td>
+<td>1.67</td>
+<td>1.67</td>
+<td>3.2</td>
+<td>277.67</td>
+<td>8.61</td>
+<td><span class="gold-as-thousands">13.3</span></td>
+<td>413</td>
+<td>69.6%</td>
+<td>47.8%</td>
+<td>25%</td>
+<td class="spstats-subject"><img alt="NautilusSquare.png" data-file-height="120" data-file-width="120" decoding="async" height="20" src="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/b/b5/NautilusSquare.png/20px-NautilusSquare.png?version=2f7658e969c25ee09be9417212d9d442" srcset="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/b/b5/NautilusSquare.png/30px-NautilusSquare.png?version=2f7658e969c25ee09be9417212d9d442 1.5x, https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/b/b5/NautilusSquare.png/40px-NautilusSquare.png?version=2f7658e969c25ee09be9417212d9d442 2x" width="20"/> Nautilus</td>
+<td><a class="external text" href="https://lol.gamepedia.com/Special:RunQuery/MatchHistoryPlayer?MHP%5Bpreload%5D=Champion&amp;MHP%5Byear%5D=2020&amp;MHP%5Blink%5D=Stunt&amp;MHP%5Bchampion%5D=Nautilus&amp;MHP%5Bspl%5D=Yes&amp;pfRunQueryFormName=MatchHistoryPlayer" rel="noreferrer noopener" target="_blank">15</a></td>
+<td>8</td>
+<td>7</td>
+<td>53.3%</td>
+<td>0.73</td>
+<td>3.93</td>
+<td>6.73</td>
+<td>1.9</td>
+<td>36.6</td>
+<td>1.06</td>
+<td><span class="gold-as-thousands">7.6</span></td>
+<td>220</td>
+<td>58%</td>
+<td>5.7%</td>
+<td>12.9%</td>
+<td class="spstats-subject"><img alt="AatroxSquare.png" data-file-height="120" data-file-width="120" decoding="async" height="20" src="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/c/cc/AatroxSquare.png/20px-AatroxSquare.png?version=87b2121a80fd9379d094acab66eae8ac" srcset="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/c/cc/AatroxSquare.png/30px-AatroxSquare.png?version=87b2121a80fd9379d094acab66eae8ac 1.5x, https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/c/cc/AatroxSquare.png/40px-AatroxSquare.png?version=87b2121a80fd9379d094acab66eae8ac 2x" width="20"/> Aatrox</td>
+<td><a class="external text" href="https://lol.gamepedia.com/Special:RunQuery/MatchHistoryPlayer?MHP%5Bpreload%5D=Champion&amp;MHP%5Byear%5D=2020&amp;MHP%5Blink%5D=Kumo&amp;MHP%5Bchampion%5D=Aatrox&amp;MHP%5Bspl%5D=Yes&amp;pfRunQueryFormName=MatchHistoryPlayer" rel="noreferrer noopener" target="_blank">10</a></td>
+<td>5</td>
+<td>5</td>
+<td>50%</td>
+<td>2.2</td>
+<td>3.1</td>
+<td>3.1</td>
+<td>1.71</td>
+<td>249.6</td>
+<td>7.69</td>
+<td><span class="gold-as-thousands">11.8</span></td>
+<td>362</td>
+<td>46.1%</td>
+<td>19.1%</td>
+<td>20.9%</td>
+<td class="spstats-subject"><img alt="KindredSquare.png" data-file-height="120" data-file-width="120" decoding="async" height="20" src="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/6/6e/KindredSquare.png/20px-KindredSquare.png?version=17f9bc36832b32c907702f7f2da9a908" srcset="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/6/6e/KindredSquare.png/30px-KindredSquare.png?version=17f9bc36832b32c907702f7f2da9a908 1.5x, https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/6/6e/KindredSquare.png/40px-KindredSquare.png?version=17f9bc36832b32c907702f7f2da9a908 2x" width="20"/> Kindred</td>
+<td><a class="external text" href="https://lol.gamepedia.com/Special:RunQuery/MatchHistoryPlayer?MHP%5Bpreload%5D=Champion&amp;MHP%5Byear%5D=2020&amp;MHP%5Blink%5D=Svenskeren&amp;MHP%5Bchampion%5D=Kindred&amp;MHP%5Bspl%5D=Yes&amp;pfRunQueryFormName=MatchHistoryPlayer" rel="noreferrer noopener" target="_blank">4</a></td>
+<td>2</td>
+<td>2</td>
+<td>50%</td>
+<td>1.25</td>
+<td>3.5</td>
+<td>5.5</td>
+<td>1.93</td>
+<td>191.75</td>
+<td>5.66</td>
+<td><span class="gold-as-thousands">10.9</span></td>
+<td>322</td>
+<td>65.9%</td>
+<td>12.2%</td>
+<td>18.5%</td>
+<td class="spstats-subject"><img alt="CorkiSquare.png" data-file-height="120" data-file-width="120" decoding="async" height="20" src="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/3/3d/CorkiSquare.png/20px-CorkiSquare.png?version=748586b7d9f251c0aceb5ea1d926bc79" srcset="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/3/3d/CorkiSquare.png/30px-CorkiSquare.png?version=748586b7d9f251c0aceb5ea1d926bc79 1.5x, https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/3/3d/CorkiSquare.png/40px-CorkiSquare.png?version=748586b7d9f251c0aceb5ea1d926bc79 2x" width="20"/> Corki</td>
+<td><a class="external text" href="https://lol.gamepedia.com/Special:RunQuery/MatchHistoryPlayer?MHP%5Bpreload%5D=Champion&amp;MHP%5Byear%5D=2020&amp;MHP%5Blink%5D=Jizuke&amp;MHP%5Bchampion%5D=Corki&amp;MHP%5Bspl%5D=Yes&amp;pfRunQueryFormName=MatchHistoryPlayer" rel="noreferrer noopener" target="_blank">2</a></td>
+<td>2</td>
+<td>0</td>
+<td>100%</td>
+<td>6.5</td>
+<td>0.5</td>
+<td>4.5</td>
+<td>22</td>
+<td>320</td>
+<td>10.19</td>
+<td><span class="gold-as-thousands">15.7</span></td>
+<td>500</td>
+<td>78.6%</td>
+<td>46.4%</td>
+<td>27%</td>
+<td class="spstats-subject"><img alt="ApheliosSquare.png" data-file-height="120" data-file-width="120" decoding="async" height="20" src="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/1/13/ApheliosSquare.png/20px-ApheliosSquare.png?version=5d897e2b4e139a8b060543fcf2ae9b4e" srcset="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/1/13/ApheliosSquare.png/30px-ApheliosSquare.png?version=5d897e2b4e139a8b060543fcf2ae9b4e 1.5x, https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/1/13/ApheliosSquare.png/40px-ApheliosSquare.png?version=5d897e2b4e139a8b060543fcf2ae9b4e 2x" width="20"/> Aphelios</td>
+<td><a class="external text" href="https://lol.gamepedia.com/Special:RunQuery/MatchHistoryPlayer?MHP%5Bpreload%5D=Champion&amp;MHP%5Byear%5D=2020&amp;MHP%5Blink%5D=Bang&amp;MHP%5Bchampion%5D=Aphelios&amp;MHP%5Bspl%5D=Yes&amp;pfRunQueryFormName=MatchHistoryPlayer" rel="noreferrer noopener" target="_blank">17</a></td>
+<td>12</td>
+<td>5</td>
+<td>70.6%</td>
+<td>3.53</td>
+<td>1.24</td>
+<td>3.82</td>
+<td>5.95</td>
+<td>298.76</td>
+<td>9.56</td>
+<td><span class="gold-as-thousands">13.5</span></td>
+<td>431</td>
+<td>61.6%</td>
+<td>29.6%</td>
+<td>24.2%</td>
+<td class="spstats-subject"><img alt="YuumiSquare.png" data-file-height="120" data-file-width="120" decoding="async" height="20" src="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/7/70/YuumiSquare.png/20px-YuumiSquare.png?version=92c1d245f68d89ad72677c1edd0af100" srcset="https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/7/70/YuumiSquare.png/30px-YuumiSquare.png?version=92c1d245f68d89ad72677c1edd0af100 1.5x, https://gamepedia.cursecdn.com/lolesports_gamepedia_en/thumb/7/70/YuumiSquare.png/40px-YuumiSquare.png?version=92c1d245f68d89ad72677c1edd0af100 2x" width="20"/> Yuumi</td>
+<td><a class="external text" href="https://lol.gamepedia.com/Special:RunQuery/MatchHistoryPlayer?MHP%5Bpreload%5D=Champion&amp;MHP%5Byear%5D=2020&amp;MHP%5Blink%5D=Zeyzal&amp;MHP%5Bchampion%5D=Yuumi&amp;MHP%5Bspl%5D=Yes&amp;pfRunQueryFormName=MatchHistoryPlayer" rel="noreferrer noopener" target="_blank">5</a></td>
+<td>3</td>
+<td>2</td>
+<td>60%</td>
+<td>1.4</td>
+<td>1.4</td>
+<td>8.8</td>
+<td>7.29</td>
+<td>13.8</td>
+<td>0.4</td>
+<td><span class="gold-as-thousands">8</span></td>
+<td>233</td>
+<td>92.7%</td>
+<td>12.7%</td>
+<td>13.5%</td>
+<td><b>Preload</b>
+</td>
+<td><span class="inputSpan"><select class="createboxInput" id="input_1" name="TS[preload]" tabindex="1"> <option value=""></option>
+<option value="TournamentByPlayer">TournamentByPlayer</option><option value="TournamentByPlayerRole">TournamentByPlayerRole</option><option value="TournamentByChampion">TournamentByChampion</option><option value="TournamentByChampionRole">TournamentByChampionRole</option><option value="ChampionByPlayer">ChampionByPlayer</option><option value="ChampionByTournament">ChampionByTournament</option><option selected="" value="PlayerByChampion">PlayerByChampion</option><option value="ByTournament">ByTournament</option><option value="ByPlayer">ByPlayer</option><option value="ByPlayerTeam">ByPlayerTeam</option><option value="ByChampion">ByChampion</option><option value="ByPlayerRole">ByPlayerRole</option><option value="ByChampionRole">ByChampionRole</option></select></span>
+</td>

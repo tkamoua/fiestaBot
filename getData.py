@@ -139,6 +139,26 @@ def getPlayerStats(playerName, year,champion,playername_oracle, isSpring ):
                         stats_counter+=1
                     
                     counter+=1
+            else:
+                url = "https://lol.gamepedia.com/Special:RunQuery/TournamentStatistics?TS%5Btournament%5D=LCS/2020%20Season/Summer%20Season&TS%5Bpreload%5D=TournamentByChampion&pfRunQueryFormName=TournamentStatistics"
+                page = requests.get(url)
+                soup = BeautifulSoup(page.content,"html.parser")
+                table = soup.find(lambda tag: tag.name=='table' ) 
+                rows = table.findAll(lambda tag: tag.name=='tr')
+                cols = row.findAll(lambda tag: tag.name == 'td')
+                counter = 0
+                stats_counter = 2
+                for col in cols:
+                    if(counter == 1 or counter == 4 or counter == 8 or counter == 10 or counter == 12):
+                        
+                        if('%' in col.text):
+                            index = col.text.find('%')
+                            d[stats_list[stats_counter]]=(float(col.text[0:index]))
+                        else:
+                            d[stats_list[stats_counter]]=(float(col.text)) 
+                        stats_counter+=1
+                    
+                    counter+=1
         d[stats_list[7]] = dmg_per_gold
     
     else:
@@ -198,6 +218,26 @@ def getPlayerStats(playerName, year,champion,playername_oracle, isSpring ):
                         
                         counter+=1
                     foundchamp = True
+        else:
+                url = "https://lol.gamepedia.com/Special:RunQuery/TournamentStatistics?TS%5Btournament%5D=LCS/2020%20Season/Summer%20Season&TS%5Bpreload%5D=TournamentByChampion&pfRunQueryFormName=TournamentStatistics"
+                page = requests.get(url)
+                soup = BeautifulSoup(page.content,"html.parser")
+                table = soup.find(lambda tag: tag.name=='table' ) 
+                rows = table.findAll(lambda tag: tag.name=='tr')
+                cols = row.findAll(lambda tag: tag.name == 'td')
+                counter = 0
+                stats_counter = 2
+                for col in cols:
+                    if(counter == 1 or counter == 4 or counter == 8 or counter == 10 or counter == 12):
+                        
+                        if('%' in col.text):
+                            index = col.text.find('%')
+                            d[stats_list[stats_counter]]=(float(col.text[0:index]))
+                        else:
+                            d[stats_list[stats_counter]]=(float(col.text)) 
+                        stats_counter+=1
+                    
+                    counter+=1
                     
         
 
@@ -675,9 +715,9 @@ def alreadytrained(clf_A,X_all):
     # hundredt_champs2 = ["Kennen","Lee Sin","Orianna", "Ashe", "Bard"]
     # gg_champs2 = ["Karma","Olaf","Zoe","Aphelios","Sett"]
     # gamePrediction(X_all,hundredt,gg,hundredt_champs2,gg_champs2,roles,"100 Thieves","Golden Guardians")
-    eg_champs2 = ["Sett","Trundle","Zoe", "Aphelios", "Nautilus"]
-    tsm_champs2 = ["Maokai","Volibear","Syndra","Kalista","Thresh"]
-    gamePrediction(X_all,cloud9,gg,eg_champs2,tsm_champs2,roles,"Cloud9","Golden Guardians")
+    clg_champs2 = ["Rumble","Trundle","Syndra", "Caitlyn", "Morgana"]
+    tl_champs2 = ["Renekton","Graves","LeBlanc","Ashe","Tahm Kench"]
+    gamePrediction(X_all,clg,tl,clg_champs2,tl_champs2,roles,"CLG","Team Liquid")
 def retrain(year,roles,filename,isSpring):
     
     result = combineGames(filename)
